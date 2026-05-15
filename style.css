@@ -1,0 +1,783 @@
+/* ═══════════════════════════════════════════════════
+   VIRTUAL PIANO — style.css
+   Theme: Dark Luxury | Fonts: Cinzel + Rajdhani
+   ═══════════════════════════════════════════════════ */
+
+/* ── CSS Variables ─────────────────────────────────── */
+:root {
+  --bg:          #0a0a0f;
+  --surface:     #12121a;
+  --border:      #2a2a3a;
+  --gold:        #c9a84c;
+  --gold-light:  #f0d080;
+  --glow:        #c9a84c55;
+  --white-key:   #f5f0e8;
+  --white-hover: #fffbe8;
+  --white-active:#e0d8c0;
+  --black-key:   #1a1a22;
+  --black-hover: #2a2a36;
+  --black-active:#3a3a4a;
+  --text:        #e8e0d0;
+  --muted:       #666680;
+  --rec-red:     #e04040;
+  --rec-glow:    #e0404055;
+  --radius:      6px;
+  --white-w:     72px;
+  --white-h:     280px;
+  --black-w:     46px;
+  --black-h:     175px;
+}
+
+/* ══════════════════════════════════════════════════════
+   NAVBAR
+   ══════════════════════════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 24px #00000066;
+}
+
+/* Brand */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-icon { font-size: 1.3rem; }
+.nav-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+}
+.nav-link {
+  display: inline-block;
+  padding: 6px 16px;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold);
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+/* Hamburger (hidden on desktop) */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Mobile drawer */
+.nav-drawer {
+  position: fixed;
+  top: 58px; right: 0;
+  width: 220px;
+  height: calc(100vh - 58px);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  gap: 6px;
+  z-index: 99;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -8px 0 40px #00000066;
+}
+.nav-drawer.open { transform: translateX(0); }
+
+.drawer-link {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.drawer-link:hover {
+  background: #1e1e2a;
+  border-color: var(--border);
+  color: var(--gold);
+}
+
+/* Overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 98;
+  background: #00000055;
+}
+.nav-overlay.show { display: block; }
+
+/* ── Mobile navbar ──────────────────────────────────── */
+@media (max-width: 700px) {
+  .nav-links    { display: none; }
+  .nav-hamburger { display: flex; }
+  .navbar { padding: 0 20px; }
+}
+
+/* ══════════════════════════════════════════════════════
+   INFO SECTIONS  (Guide / Sounds / About)
+   ══════════════════════════════════════════════════════ */
+
+.info-section {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 70px;
+  padding-top: 10px;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.section-sub code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.85rem;
+  color: var(--gold-light);
+}
+
+/* Guide grid */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 18px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.guide-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px var(--glow);
+}
+.guide-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+.guide-card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+.guide-card p {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Sounds table */
+.sounds-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.sounds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+.sounds-table th {
+  background: #1a1a26;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.sounds-table td {
+  padding: 10px 14px;
+  color: var(--text);
+  border-bottom: 1px solid #1e1e2a;
+  vertical-align: middle;
+}
+.sounds-table tr:last-child td { border-bottom: none; }
+.sounds-table tr:hover td { background: #15151f; }
+.sounds-table code {
+  background: #1a1a2a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--gold-light);
+  font-size: 0.8rem;
+}
+.sounds-table a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+.sounds-table a:hover { text-decoration: underline; }
+
+/* Tip box */
+.sounds-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #141420;
+  border: 1px solid #2a2a50;
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.tip-badge {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+.sounds-tip code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--gold-light);
+  font-size: 0.8rem;
+}
+
+/* About card */
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 24px;
+  line-height: 1.7;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.about-card p { margin-bottom: 14px; }
+.about-card strong { color: var(--text); }
+.about-list {
+  list-style: none;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.about-list li {
+  color: var(--text);
+  font-size: 0.88rem;
+}
+.about-credit {
+  font-size: 0.8rem !important;
+  color: var(--muted) !important;
+}
+.about-credit code {
+  background: #1a1a2a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--gold-light);
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  max-width: 900px;
+}
+
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Body ───────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 90px 20px 60px; /* 90px = navbar height + breathing room */
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text);
+  /* Subtle radial glow at top-center */
+  background-image:
+    radial-gradient(ellipse 60% 35% at 50% 0%, #1e1830 0%, transparent 70%);
+  overflow-x: hidden;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  animation: fadeDown 0.7s ease both;
+}
+
+h1 .icon {
+  /* emoji doesn't inherit gradient, so render separately */
+  -webkit-text-fill-color: initial;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: fadeDown 0.7s 0.1s ease both;
+}
+
+/* ── Note Display ───────────────────────────────────── */
+/*
+  Shows the name of the note being played.
+  Fades in on play, fades out after a moment.
+*/
+.note-display {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  animation: fadeDown 0.7s 0.2s ease both;
+}
+
+#noteLabel {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px var(--glow);
+  opacity: 0;
+  transition: opacity 0.05s;
+}
+
+#noteLabel.visible {
+  opacity: 1;
+}
+
+/* ── Controls Bar ───────────────────────────────────── */
+/*
+  Flex row with volume slider, label toggle, and recorder buttons.
+*/
+.controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 32px;
+  padding: 14px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #00000055;
+  animation: fadeDown 0.7s 0.3s ease both;
+}
+
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Volume slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 110px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--glow);
+  cursor: pointer;
+}
+
+/* Buttons */
+.ctrl-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+.ctrl-btn:hover:not(:disabled) {
+  background: #1e1e2a;
+  border-color: var(--gold);
+  box-shadow: 0 0 12px var(--glow);
+}
+.ctrl-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.ctrl-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Record button has red tint */
+.ctrl-btn.rec {
+  border-color: var(--rec-red);
+  color: var(--rec-red);
+}
+.ctrl-btn.rec:hover {
+  background: #1e1218;
+  box-shadow: 0 0 12px var(--rec-glow);
+}
+/* While recording, pulse */
+.ctrl-btn.rec.recording {
+  animation: pulse-rec 1s infinite;
+  color: #fff;
+  background: var(--rec-red);
+}
+
+.recorder {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Recording status text */
+.rec-status {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--rec-red);
+  font-weight: 600;
+  min-width: 80px;
+}
+
+/* ── Piano Wrapper ───────────────────────────────────── */
+/*
+  Horizontal scroll on small screens so the piano
+  never gets crushed.
+*/
+.piano-wrapper {
+  overflow-x: auto;
+  padding-bottom: 16px;
+  animation: fadeUp 0.7s 0.4s ease both;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.piano-wrapper::-webkit-scrollbar { height: 4px; }
+.piano-wrapper::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── Piano ───────────────────────────────────────────── */
+/*
+  Contains two .octave blocks + a divider.
+*/
+.piano {
+  display: flex;
+  align-items: flex-start;
+  /* Outer shadow / glow around the whole piano */
+  filter: drop-shadow(0 20px 60px #00000088);
+}
+
+/* ── Octave block ────────────────────────────────────── */
+/*
+  Each octave is position:relative so black keys can be
+  absolutely positioned inside it.
+  Width = 7 white keys × white-key-width.
+*/
+.octave {
+  position: relative;
+  display: flex;
+}
+
+/* ── Octave divider ──────────────────────────────────── */
+/*
+  Thin golden line between the two octave blocks.
+*/
+.octave-divider {
+  width: 3px;
+  height: var(--white-h);
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  align-self: flex-start;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* ── Keys shared ─────────────────────────────────────── */
+.key {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: background 0.08s, transform 0.08s, box-shadow 0.08s;
+}
+
+.key-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding-bottom: 14px;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+/* Labels hidden state */
+.labels-hidden .key-label {
+  opacity: 0;
+}
+
+/* ── White Keys ──────────────────────────────────────── */
+.white {
+  width: var(--white-w);
+  height: var(--white-h);
+  background: var(--white-key);
+  border: 1px solid #bbb;
+  border-top: none;
+  color: #444;
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  /* Subtle inner highlight at top */
+  box-shadow:
+    inset 0 6px 10px #ffffff66,
+    inset 0 -4px 8px #00000010,
+    2px 0 4px #00000022;
+}
+.white:hover {
+  background: var(--white-hover);
+  box-shadow:
+    inset 0 6px 10px #ffffff88,
+    inset 0 -4px 8px #00000010,
+    0 0 18px var(--glow);
+}
+.white.active {
+  background: var(--white-active);
+  transform: scaleY(0.98);
+  transform-origin: top;
+  box-shadow:
+    inset 0 2px 8px #00000033,
+    0 0 20px var(--glow);
+}
+
+/* ── Black Keys ──────────────────────────────────────── */
+.black {
+  width: var(--black-w);
+  height: var(--black-h);
+  background: linear-gradient(180deg, #1a1a22 60%, #2a2a38);
+  color: #aaa;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  border-radius: 0 0 8px 8px;
+  box-shadow:
+    inset 0 -4px 8px #00000066,
+    inset 0 2px 4px #ffffff08,
+    4px 6px 12px #00000077;
+  border: 1px solid #333;
+  border-top: none;
+}
+.black:hover {
+  background: linear-gradient(180deg, #25253a 60%, #353548);
+  box-shadow:
+    inset 0 -4px 8px #00000066,
+    0 0 16px var(--glow);
+}
+.black.active {
+  background: linear-gradient(180deg, #35354a 60%, #45456a);
+  transform: scaleY(0.97);
+  transform-origin: top;
+  box-shadow:
+    inset 0 2px 6px #00000055,
+    0 0 20px var(--glow);
+}
+
+/* ─────────────────────────────────────────────────────
+   BLACK KEY POSITIONS
+   Formula: white_w × (n - 0.3)
+   n = gap count from left edge of octave
+   ─────────────────────────────────────────────────── */
+
+/* Octave 4 — same as original but recalculated for white-w:72px */
+/* C# = after key 1  → 72*1 - 28 = 44 */
+.cs4, .cs5 { left: 48px; }
+/* D# = after key 2  → 72*2 - 28 = 116 */
+.ds4, .ds5 { left: 120px; }
+/* F# = after key 4  → 72*4 - 28 = 260 */
+.fs4, .fs5 { left: 260px; }
+/* G# = after key 5  → 72*5 - 28 = 332 */
+.gs4, .gs5 { left: 332px; }
+/* A# = after key 6  → 72*6 - 28 = 404 */
+.as4, .as5 { left: 404px; }
+
+/* ── Legend ──────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 28px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-rec {
+  0%, 100% { box-shadow: 0 0 0 0 var(--rec-glow); }
+  50%       { box-shadow: 0 0 0 8px transparent; }
+}
+
+/* ── Mobile Responsive ───────────────────────────────── */
+@media (max-width: 700px) {
+  :root {
+    --white-w: 48px;
+    --white-h: 200px;
+    --black-w: 32px;
+    --black-h: 125px;
+  }
+
+  h1 { font-size: 1.6rem; }
+
+  /* Recalculate black key positions for 48px white keys */
+  .cs4, .cs5 { left: 32px; }
+  .ds4, .ds5 { left: 80px; }
+  .fs4, .fs5 { left: 174px; }
+  .gs4, .gs5 { left: 222px; }
+  .as4, .as5 { left: 270px; }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .legend { font-size: 0.7rem; }
+}
+.footer-link{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}

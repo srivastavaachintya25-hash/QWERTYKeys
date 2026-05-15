@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Piano</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Cinzel for the title, Rajdhani for labels -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ─── NAVIGATION BAR ──────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="nav-icon">🎹</span>
+      <span class="nav-title">QWERTYKeys</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#play"    class="nav-link active">Play</a></li>
+      <li><a href="#guide"   class="nav-link">Guide</a></li>
+    </ul>
+    <!-- Hamburger for mobile -->
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#play"   class="drawer-link" onclick="closeDrawer()">🎹 Play</a>
+    <a href="#guide"  class="drawer-link" onclick="closeDrawer()">📖 Guide</a>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+
+  <!-- ─── PLAY SECTION ────────────────────────────────────── -->
+  <section id="play">
+
+  <!-- ─── HEADER ──────────────────────────────────────────── -->
+  <header>
+    <h1><span class="icon">🎹</span> QWERTYKeys</h1>
+    <p class="subtitle">Two Octaves · Keyboard & Mouse · Record & Playback</p>
+  </header>
+
+  <!-- ─── NOW-PLAYING DISPLAY ─────────────────────────────── -->
+  <div class="note-display">
+    <span id="noteLabel">—</span>
+  </div>
+
+  <!-- ─── CONTROLS BAR ────────────────────────────────────── -->
+  <div class="controls">
+
+    <!-- Volume -->
+    <label class="ctrl-group">
+      <span>🔊 Volume</span>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+    </label>
+
+    <!-- Key-label toggle -->
+    <button id="toggleLabels" class="ctrl-btn">Hide Labels</button>
+
+    <!-- Recorder -->
+    <div class="recorder">
+      <button id="recordBtn"  class="ctrl-btn rec">⏺ Record</button>
+      <button id="stopBtn"    class="ctrl-btn" disabled>⏹ Stop</button>
+      <button id="playBtn"    class="ctrl-btn" disabled>▶ Play</button>
+      <button id="clearBtn"   class="ctrl-btn" disabled>🗑 Clear</button>
+    </div>
+
+    <!-- Recording status -->
+    <span id="recStatus" class="rec-status"></span>
+  </div>
+
+  <div class="piano-wrapper">
+    <div class="piano">
+
+      <!-- ══════════ OCTAVE 4 (C4–B4) ══════════ -->
+      <div class="octave" id="oct4">
+
+        <!-- White keys -->
+        <div class="key white" data-note="C4"  data-key="q"><span class="key-label">Q</span></div>
+        <div class="key white" data-note="D4"  data-key="w"><span class="key-label">W</span></div>
+        <div class="key white" data-note="E4"  data-key="e"><span class="key-label">E</span></div>
+        <div class="key white" data-note="F4"  data-key="r"><span class="key-label">R</span></div>
+        <div class="key white" data-note="G4"  data-key="t"><span class="key-label">T</span></div>
+        <div class="key white" data-note="A4"  data-key="y"><span class="key-label">Y</span></div>
+        <div class="key white" data-note="B4"  data-key="u"><span class="key-label">U</span></div>
+
+        <!-- Black keys (absolutely positioned inside .octave) -->
+        <div class="key black cs4" data-note="C#4" data-key="2"><span class="key-label">2</span></div>
+        <div class="key black ds4" data-note="D#4" data-key="3"><span class="key-label">3</span></div>
+        <div class="key black fs4" data-note="F#4" data-key="5"><span class="key-label">5</span></div>
+        <div class="key black gs4" data-note="G#4" data-key="6"><span class="key-label">6</span></div>
+        <div class="key black as4" data-note="A#4" data-key="7"><span class="key-label">7</span></div>
+
+      </div><!-- /octave4 -->
+
+      <!-- Divider -->
+      <div class="octave-divider"></div>
+
+      <!-- ══════════ OCTAVE 5 (C5–B5) ══════════ -->
+      <div class="octave" id="oct5">
+
+        <!-- White keys -->
+        <div class="key white" data-note="C5"  data-key="a"><span class="key-label">A</span></div>
+        <div class="key white" data-note="D5"  data-key="s"><span class="key-label">S</span></div>
+        <div class="key white" data-note="E5"  data-key="d"><span class="key-label">D</span></div>
+        <div class="key white" data-note="F5"  data-key="f"><span class="key-label">F</span></div>
+        <div class="key white" data-note="G5"  data-key="g"><span class="key-label">G</span></div>
+        <div class="key white" data-note="A5"  data-key="h"><span class="key-label">H</span></div>
+        <div class="key white" data-note="B5"  data-key="j"><span class="key-label">J</span></div>
+
+        <!-- Black keys -->
+        <div class="key black cs5" data-note="C#5" data-key="z"><span class="key-label">Z</span></div>
+        <div class="key black ds5" data-note="D#5" data-key="x"><span class="key-label">X</span></div>
+        <div class="key black fs5" data-note="F#5" data-key="c"><span class="key-label">C</span></div>
+        <div class="key black gs5" data-note="G#5" data-key="v"><span class="key-label">V</span></div>
+        <div class="key black as5" data-note="A#5" data-key="b"><span class="key-label">B</span></div>
+
+      </div><!-- /octave5 -->
+
+    </div><!-- /piano -->
+  </div><!-- /piano-wrapper -->
+
+  <!-- ─── KEYBOARD MAP LEGEND ──────────────────────────────── -->
+  <div class="legend">
+    <span>Octave 4: <kbd>Q W E R T Y U</kbd> / sharps: <kbd>2 3 5 6 7</kbd></span>
+    <span>Octave 5: <kbd>A S D F G H J</kbd> / sharps: <kbd>Z X C V B</kbd></span>
+  </div>
+
+  </section><!-- /play -->
+
+  <!-- ─── GUIDE SECTION ───────────────────────────────────── -->
+  <section id="guide" class="info-section">
+    <h2 class="section-title">📖 How to Play</h2>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-icon">⌨️</div>
+        <h3>Keyboard</h3>
+        <p>Use <kbd>Q W E R T Y U</kbd> for Octave 4 white keys and <kbd>A S D F G H J</kbd> for Octave 5. Sharps are <kbd>2 3 5 6 7</kbd> and <kbd>Z X C V B</kbd>.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🖱️</div>
+        <h3>Mouse / Touch</h3>
+        <p>Click or tap any key on screen. Works on phones and tablets too — scroll horizontally if the piano is wider than your screen.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">⏺️</div>
+        <h3>Recorder</h3>
+        <p>Hit <strong>Record</strong>, play your melody, then <strong>Stop</strong>. Press <strong>Play</strong> to hear it back with the exact original timing preserved.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🔊</div>
+        <h3>Volume & Labels</h3>
+        <p>Use the volume slider to adjust loudness. Toggle <strong>Hide Labels</strong> to remove keyboard hints for a cleaner look.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer class="site-footer">
+
+  <p>
+
+    🎹 QWERTYKeys ·
+
+    <a href="https://www.linkedin.com/in/achintya-srivastava-99a105326/"
+       target="_blank"
+       class="footer-link">
+       Achintya Srivastava
+    </a>
+
+    ·
+
+    <a href="mailto:srivastavaachintya0609@gmail.com"
+       class="footer-link">
+       srivastavaachintya0609@gmail.com
+    </a>
+
+    ·
+
+    <a href="https://www.instagram.com/achintysrivastava/"
+       target="_blank"
+       class="footer-link">
+       @achintysrivastava
+    </a>
+
+  </p>
+
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
