@@ -1,31 +1,31 @@
 const soundFiles = {
   /* ── Octave 4 ── */
   "C4":  "sounds/C.mp3",
-  "C#4": "sounds/C%23.mp3",
+  "C#4": "sounds/Cs.mp3",
   "D4":  "sounds/D.mp3",
-  "D#4": "sounds/D%23.mp3",
+  "D#4": "sounds/Ds.mp3",
   "E4":  "sounds/E.mp3",
   "F4":  "sounds/F.mp3",
-  "F#4": "sounds/F%23.mp3",
+  "F#4": "sounds/Fs.mp3",
   "G4":  "sounds/G.mp3",
-  "G#4": "sounds/G%23.mp3",
+  "G#4": "sounds/Gs.mp3",
   "A4":  "sounds/A.mp3",
-  "A#4": "sounds/A%23.mp3",
+  "A#4": "sounds/As.mp3",
   "B4":  "sounds/B.mp3",
 
     /* ── Octave 5 ── */
-    
+
 "C5": "sounds/C5.mp3",
-"C#5": "sounds/C%235.mp3",
+"C#5": "sounds/Cs5.mp3",
 "D5": "sounds/D5.mp3",
-"D#5": "sounds/D%235.mp3",
+"D#5": "sounds/Ds5.mp3",
 "E5": "sounds/E5.mp3",
 "F5": "sounds/F5.mp3",
-"F#5": "sounds/F%235.mp3",
+"F#5": "sounds/Fs5.mp3",
 "G5": "sounds/G5.mp3",
-"G#5": "sounds/G%235.mp3",
+"G#5": "sounds/Gs5.mp3",
 "A5": "sounds/A5.mp3",
-"A#5": "sounds/A%235.mp3",
+"A#5": "sounds/As5.mp3",
 "B5": "sounds/B5.mp3",
 };
 
